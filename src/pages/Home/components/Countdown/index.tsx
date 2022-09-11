@@ -19,18 +19,18 @@ export const Countdown = () => {
       interval = setInterval(() => {
         const secondsDifference = differenceInSeconds(
           new Date(),
-          activeCycle.startDate,
+          new Date(activeCycle.startDate),
         );
         if (secondsDifference >= totalSeconds) {
           markCurrentCycleAsFinished();
           setSecondsPassed(totalSeconds);
           clearInterval(interval);
         } else setSecondsPassed(secondsDifference);
-        return () => {
-          clearInterval(interval);
-        };
       }, 1000);
     }
+    return () => {
+      clearInterval(interval);
+    };
   }, [markCurrentCycleAsFinished, activeCycle, totalSeconds, activeCycleId]);
 
   const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
